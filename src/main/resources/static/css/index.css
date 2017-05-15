@@ -1,0 +1,18 @@
+
+.my-light-blue{
+    background-color:#303b49;
+}
+.my-light-gray{
+    background-color:#ebebf1;
+}
+.my-hidden{
+    visibility:hidden;
+}
+.weui-navbar__item{
+    background-color:rgb(32,43,57);
+    color:white
+}
+.weui-navbar__item:hover{
+    background-color:rgb(32,43,57);
+    color:white
+}
