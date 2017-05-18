@@ -10,7 +10,6 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
 @ConfigurationProperties(prefix = "wechat")
 public class WechatProperties {
 
-    @NestedConfigurationProperty
     private String token;
     private String appid;
     private String secret;

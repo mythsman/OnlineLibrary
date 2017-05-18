@@ -8,7 +8,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@Sql("/init-schema.sql")
+@Sql("/create-table.sql")
 public class OnlinelibraryApplicationTests {
 
 	@Test

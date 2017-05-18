@@ -6,10 +6,10 @@
 	<groupId>com.mythsman</groupId>
 	<artifactId>onlinelibrary</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>onlinelibrary</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Changxue app</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
