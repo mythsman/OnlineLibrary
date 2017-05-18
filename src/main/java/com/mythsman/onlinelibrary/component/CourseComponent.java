@@ -1,4 +1,4 @@
-package com.mythsman.onlinelibrary;
+package com.mythsman.onlinelibrary.component;
 
 import com.mythsman.onlinelibrary.dao.CourseDao;
 import com.mythsman.onlinelibrary.model.Course;

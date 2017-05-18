@@ -1,6 +1,6 @@
 package com.mythsman.onlinelibrary.controller;
 
-import com.mythsman.onlinelibrary.CourseComponent;
+import com.mythsman.onlinelibrary.component.CourseComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

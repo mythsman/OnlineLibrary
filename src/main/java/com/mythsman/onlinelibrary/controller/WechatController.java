@@ -1,6 +1,7 @@
 package com.mythsman.onlinelibrary.controller;
 
 import com.mythsman.onlinelibrary.util.Digest;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,8 +17,8 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/wechat", method = RequestMethod.GET)
 public class WechatController {
-    public static final String TOKEN = "mythsman";
-
+    @Value("${wechat.token}")
+    private String TOKEN;
 
     @RequestMapping(value = "/", method = RequestMethod.GET, params = {"signature", "timestamp", "nonce", "echostr"})
     public String check(
@@ -31,7 +32,7 @@ public class WechatController {
         list.add(signature);
         list.add(nonce);
         Collections.sort(list);
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (String s : list) {
             sb.append(s);
         }
@@ -41,5 +42,6 @@ public class WechatController {
             return "Invalid parameters.";
         }
     }
+
 
 }
