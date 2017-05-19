@@ -1,12 +1,12 @@
 package com.mythsman.onlinelibrary.controller;
 
 import com.mythsman.onlinelibrary.util.Digest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -17,10 +17,11 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/wechat", method = RequestMethod.GET)
 public class WechatController {
+    Logger logger= LoggerFactory.getLogger(WechatController.class);
     @Value("${wechat.token}")
     private String TOKEN;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET, params = {"signature", "timestamp", "nonce", "echostr"})
+    @RequestMapping(value = "", method = RequestMethod.GET, params = {"signature", "timestamp", "nonce", "echostr"})
     public String check(
             @RequestParam("signature") String signature,
             @RequestParam("timestamp") String timestamp,
@@ -39,9 +40,14 @@ public class WechatController {
         if (Digest.encodeBySHA1(sb.toString()).equals(signature)) {
             return echostr;
         } else {
-            return "Invalid parameters.";
+            return "";
         }
     }
 
+    @RequestMapping(value = "",method = {RequestMethod.POST})
+    public String post(@RequestBody String s) {
+        logger.info(s);
+        return "Got it";
+    }
 
 }

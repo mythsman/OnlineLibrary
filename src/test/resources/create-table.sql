@@ -23,7 +23,7 @@ CREATE TABLE `article` (
   `course` varchar(20) NOT NULL,
   `name` varchar(50) NOT NULL,
   `brief` varchar(100) DEFAULT NULL,
-  `date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `download` int(11) DEFAULT '0',
   `price` int(11) DEFAULT '0',
   `hash` varchar(50) NOT NULL,
@@ -34,3 +34,4 @@ CREATE TABLE `article` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `article`(uid,school,college,course,name,brief,hash) values(1,'苏州大学','计算机科学与技术学院','离散数学','这是一个文件','这里是简介','232323232');
+

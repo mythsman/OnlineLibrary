@@ -1,7 +1,6 @@
 package com.mythsman.onlinelibrary.model;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
 /**
  * Created by myths on 5/18/17.
