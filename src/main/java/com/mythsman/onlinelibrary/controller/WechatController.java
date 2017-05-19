@@ -28,9 +28,9 @@ public class WechatController {
             @RequestParam("nonce") String nonce,
             @RequestParam("echostr") String echostr
     ) {
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
         list.add(TOKEN);
-        list.add(signature);
+        list.add(timestamp);
         list.add(nonce);
         Collections.sort(list);
         StringBuilder sb = new StringBuilder();
