@@ -1,4 +1,4 @@
-package com.mythsman.onlinelibrary.component;
+package com.mythsman.onlinelibrary.service;
 
 import com.mythsman.onlinelibrary.dao.CourseDao;
 import com.mythsman.onlinelibrary.model.Course;
@@ -15,7 +15,7 @@ import java.util.Map;
  * Created by myths on 5/15/17.
  */
 @Component
-public class CourseComponent implements InitializingBean{
+public class CourseService implements InitializingBean{
 
     private Map<String,Map<String,List<String>>> courseMap;
 

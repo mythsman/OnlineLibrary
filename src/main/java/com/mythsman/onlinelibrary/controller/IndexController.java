@@ -1,6 +1,6 @@
 package com.mythsman.onlinelibrary.controller;
 
-import com.mythsman.onlinelibrary.component.CourseComponent;
+import com.mythsman.onlinelibrary.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +17,7 @@ import java.util.Map;
 public class IndexController {
 
     @Autowired
-    CourseComponent courseComponent;
+    CourseService courseService;
 
     @RequestMapping(path = {"/tab1","/"},method = {RequestMethod.GET})
     public String tab1(Model model){
@@ -26,7 +26,7 @@ public class IndexController {
 
     @RequestMapping(path = {"/tab2"},method = {RequestMethod.GET})
     public String tab2(Model model){
-        Map<String,Map<String,List<String>>> schools=courseComponent.getCourseMap();
+        Map<String,Map<String,List<String>>> schools= courseService.getCourseMap();
         model.addAttribute("courseMap",schools);
         return "tab2";
     }
