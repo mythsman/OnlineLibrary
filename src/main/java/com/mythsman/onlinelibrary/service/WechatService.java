@@ -90,8 +90,8 @@ public class WechatService implements InitializingBean{
 
         Document response = DocumentHelper.createDocument();
         Element xml = response.addElement( "xml" );
-        xml.addElement("ToUserName").addCDATA(id);
-        xml.addElement("FromUserName").addCDATA(request.selectSingleNode("//FromUserName").getText());
+        xml.addElement("ToUserName").addCDATA(request.selectSingleNode("//FromUserName").getText());
+        xml.addElement("FromUserName").addCDATA(id);
         xml.addElement("CreateTime").addText(String.valueOf(new Date().getTime()/1000));
         xml.addElement("MsgType").addCDATA("text");
         xml.addElement("Content").addCDATA("欢迎您的使用!");
