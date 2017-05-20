@@ -7,6 +7,10 @@ package com.mythsman.onlinelibrary.interceptor;
 
 import com.alibaba.fastjson.JSONObject;
 import com.mythsman.onlinelibrary.component.UserComponent;
+import com.mythsman.onlinelibrary.dao.TicketDao;
+import com.mythsman.onlinelibrary.dao.UserDao;
+import com.mythsman.onlinelibrary.model.Ticket;
+import com.mythsman.onlinelibrary.model.User;
 import com.mythsman.onlinelibrary.service.WechatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,6 +21,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URLEncoder;
+import java.util.Date;
 
 /**
  * Created by myths on 5/4/17.
@@ -28,10 +33,16 @@ public class AppInterceptor implements HandlerInterceptor {
     @Autowired
     WechatService wechatService;
 
+    @Autowired
+    TicketDao ticketDao;
+
+    @Autowired
+    UserDao userDao;
+
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        String ticket=null;
-        if(httpServletRequest.getCookies()!=null) {
+        String ticket = null;
+        if (httpServletRequest.getCookies() != null) {
             for (Cookie cookie : httpServletRequest.getCookies()) {
                 if (cookie.getName().equals("ticket")) {
                     ticket = cookie.getValue();
@@ -40,18 +51,31 @@ public class AppInterceptor implements HandlerInterceptor {
             }
         }
 
-        if(ticket==null){
-            String callback= URLEncoder.encode("http://myths.mythsman.com/wechat","UTF-8");
-            String redirect = String.format("https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s&response_type=code&scope=%s&state=STATE#wechat_redirect", wechatService.getAppid(), callback ,"snsapi_userinfo");
+        if (ticket == null) {
+            String callback = URLEncoder.encode("http://myths.mythsman.com/wechat", "UTF-8");
+            String redirect = String.format("https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s&response_type=code&scope=%s&state=STATE#wechat_redirect", wechatService.getAppid(), callback, "snsapi_userinfo");
             httpServletResponse.sendRedirect(redirect);
+            return true;
         }
+
+        Ticket loginTicket = ticketDao.selectByTicket(ticket);
+        if (loginTicket == null || loginTicket.getExpire().before(new Date())) {
+            String callback = URLEncoder.encode("http://myths.mythsman.com/wechat", "UTF-8");
+            String redirect = String.format("https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s&response_type=code&scope=%s&state=STATE#wechat_redirect", wechatService.getAppid(), callback, "snsapi_userinfo");
+            httpServletResponse.sendRedirect(redirect);
+            return true;
+        }
+
+        User user = userDao.selectById(loginTicket.getUid());
+        userComponent.setUser(user);
+
         return true;
     }
 
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
-        if(modelAndView!=null){
-            modelAndView.addObject("user",userComponent.getUser());
+        if (modelAndView != null) {
+            modelAndView.addObject("user", userComponent.getUser());
         }
     }
 

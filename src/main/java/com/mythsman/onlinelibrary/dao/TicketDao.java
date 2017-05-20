@@ -1,5 +1,6 @@
 package com.mythsman.onlinelibrary.dao;
 
+import com.mythsman.onlinelibrary.model.Ticket;
 import com.mythsman.onlinelibrary.model.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -21,5 +22,5 @@ public interface TicketDao {
             @Param("expire") Date expire
     );
     @Select({"select * from ticket where ticket=#{ticket}"})
-    public User selectByTicket(@Param("ticket") String ticket);
+    public Ticket selectByTicket(@Param("ticket") String ticket);
 }

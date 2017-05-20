@@ -79,7 +79,6 @@ public class WechatController {
         String country = jsonObject.getString("country");
         String headimgurl = jsonObject.getString("headimgurl");
 
-
         if (userDao.selectByOpenid(openId) == null) {
             userDao.insert(nickname, sex, province, city, country, headimgurl, openId);
         }
