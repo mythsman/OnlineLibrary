@@ -5,14 +5,11 @@ package com.mythsman.onlinelibrary.interceptor;
  */
 
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.mythsman.onlinelibrary.component.UserComponent;
 import com.mythsman.onlinelibrary.service.WechatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -33,6 +30,9 @@ public class PassportInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
+        if(httpServletRequest.getServletPath().equals("/wechat")){
+            return true;
+        }
         String code=httpServletRequest.getParameter("code");
         if(code!=null){
             String url=String.format(" https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s&grant_type=authorization_code",wechatService.getAppid(),wechatService.getSecret(),code);
