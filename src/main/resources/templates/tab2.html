@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0"/>
     <link rel="stylesheet" href="../static/css/weui.min.css" th:href="@{/css/weui.min.css}"/>
     <link rel="stylesheet" href="../static/css/index.css" th:href="@{/css/index.css}"/>
-    <link rel="stylesheet" href="../static/css/swiper.min.css" th:href="@{/css/swiper.min.css}" />
-    <script src="../static/js/swiper.min.js" th:src="@{/js/swiper.min.js}" ></script>
-    <script src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}" ></script>
+    <link rel="stylesheet" href="../static/css/swiper.min.css" th:href="@{/css/swiper.min.css}"/>
+    <script src="../static/js/swiper.min.js" th:src="@{/js/swiper.min.js}"></script>
+    <script src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
 </head>
 <body>
 <div class="weui-tab">
@@ -27,11 +27,11 @@
     </div>
 
     <div class="weui-tab__panel my-light-gray">
-        <div  class="weui-tab__panel">
+        <div class="weui-tab__panel">
             <div class="weui-cells__title">
                 文档筛选
             </div>
-            <div  class="weui-cells">
+            <div class="weui-cells">
                 <div class="weui-cell weui-cell_select weui-cell_select-after">
                     <div class="weui-cell__hd">
                         <label class="weui-label">
@@ -65,7 +65,7 @@
                         </label>
                     </div>
                     <div class="weui-cell__bd">
-                        <select  id="selectCourse" class="weui-select" name="course" dir="rtl">
+                        <select id="selectCourse" class="weui-select" name="course" dir="rtl">
                             <option>
                                 {{courseName}}
                             </option>
@@ -94,13 +94,13 @@
                 悦学首页
             </p>
         </a>
-        <a th:href="@{/app/tab2}" class="weui-tabbar__item weui-bar__item_on" >
+        <a th:href="@{/app/tab2}" class="weui-tabbar__item weui-bar__item_on">
             <img src="../static/icons/icon_tabbar.png" th:src="@{/icons/icon_tabbar.png}" class="weui-tabbar__icon"/>
             <p class="weui-tabbar__label">
                 悦学文库
             </p>
         </a>
-        <a th:href="@{/app/tab3}" class="weui-tabbar__item" >
+        <a th:href="@{/app/tab3}" class="weui-tabbar__item">
             <img src="../static/icons/icon_tabbar.png" th:src="@{/icons/icon_tabbar.png}" class="weui-tabbar__icon"/>
             <p class="weui-tabbar__label">
                 我的设置
@@ -110,35 +110,35 @@
 </div>
 </body>
 <script th:inline="javascript">
-/*<![CDATA[*/
-    var courseMap=[[${courseMap}]];
-    var schoolName="";
-    var collegeName="";
-    $(function(){
+    <![CDATA[
+    var courseMap = [[${courseMap}]];
+    var schoolName = "";
+    var collegeName = "";
+    $(function () {
         updateSchool();
         updateCollege();
         updateCourse();
 
-        $("#selectSchool").on("change",function(){
+        $("#selectSchool").on("change", function () {
             updateCollege();
         });
-        $("#selectCollege").on("change",function(){
+        $("#selectCollege").on("change", function () {
             updateCourse();
         });
-        $("#search").on('click',function(){
+        $("#search").on('click', function () {
             $.ajax({
-                url:"/app/search",
-                method:"post",
-                data:{
+                url: "/app/search",
+                method: "post",
+                data: {
                     "school": $("#selectSchool").val(),
                     "college": $("#selectCollege").val(),
                     "course": $("#selectCourse").val(),
                 },
-                success:function(data){
-                    data=JSON.parse(data);
-                    var items="";
-                    for(var i in data){
-                        items=items+'<div onclick=window.location.href="/detail/'+data[i]['fid']+'" class="weui-panel"><div class="weui-panel__bd"><div class="weui-media-box weui-media-box_text"><h4 class="weui-media-box__title">'+data[i]['name']+'</h4> <p class="weui-media-box__desc">'+data[i]['brief']+'</p><ul class="weui-media-box__info"><li class="weui-media-box__info__meta">下载次数：'+data[i]['download']+'</li></ul></div></div></div>';
+                success: function (data) {
+                    data = JSON.parse(data);
+                    var items = "";
+                    for (var i in data) {
+                        items = items + '<div onclick=window.location.href="/detail/' + data[i]['fid'] + '" class="weui-panel"><div class="weui-panel__bd"><div class="weui-media-box weui-media-box_text"><h4 class="weui-media-box__title">' + data[i]['name'] + '</h4> <p class="weui-media-box__desc">' + data[i]['brief'] + '</p><ul class="weui-media-box__info"><li class="weui-media-box__info__meta">下载次数：' + data[i]['download'] + '</li></ul></div></div></div>';
                     }
                     $("#result").html(items);
                 }
@@ -146,36 +146,36 @@
         });
     });
 
-    function updateSchool(){
-        var items="";
-        for(var schoolName in courseMap){
-            var item='<option value="'+schoolName+ '">'+schoolName+'</option>';
-            items=items+item;
+    function updateSchool() {
+        var items = "";
+        for (var schoolName in courseMap) {
+            var item = '<option value="' + schoolName + '">' + schoolName + '</option>';
+            items = items + item;
         }
         $("#selectSchool").html(items);
     }
 
-    function updateCollege(){
-        var items="";
-        schoolName=$("#selectSchool").val();
-        for(var collegeName in courseMap[schoolName]){
-            var item='<option value="'+collegeName+ '">'+collegeName+'</option>';
-            items=items+item;
+    function updateCollege() {
+        var items = "";
+        schoolName = $("#selectSchool").val();
+        for (var collegeName in courseMap[schoolName]) {
+            var item = '<option value="' + collegeName + '">' + collegeName + '</option>';
+            items = items + item;
         }
         $("#selectCollege").html(items);
 
     }
-    function updateCourse(){
-        var items="";
-        collegeName=$("#selectCollege").val();
-        for(var courseName in courseMap[schoolName][collegeName]){
-            var item='<option value="'+courseMap[schoolName][collegeName][courseName]+ '">'+courseMap[schoolName][collegeName][courseName]+'</option>';
-            items=items+item;
+    function updateCourse() {
+        var items = "";
+        collegeName = $("#selectCollege").val();
+        for (var courseName in courseMap[schoolName][collegeName]) {
+            var item = '<option value="' + courseMap[schoolName][collegeName][courseName] + '">' + courseMap[schoolName][collegeName][courseName] + '</option>';
+            items = items + item;
         }
         $("#selectCourse").html(items);
     }
 
-/*]]>*/
+    ]]>
 </script>
 </html>
 
