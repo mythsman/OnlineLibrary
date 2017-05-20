@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 import java.util.Map;
@@ -45,6 +46,7 @@ public class AppController {
     }
 
     @RequestMapping(path = {"/search"}, method = {RequestMethod.POST})
+    @ResponseBody
     public String search(@RequestParam("school") String school, @RequestParam("college") String college, @RequestParam("course") String course) {
         List<Article> list=articleDao.selectByCourse(school,college,course);
         return JSON.toJSONString(list);
