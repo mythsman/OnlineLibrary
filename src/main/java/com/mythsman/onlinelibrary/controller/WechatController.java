@@ -79,13 +79,12 @@ public class WechatController {
         String country = jsonObject.getString("country");
         String headimgurl = jsonObject.getString("headimgurl");
 
-        System.out.println(headimgurl);
 
         if (userDao.selectByOpenid(openId) == null) {
             userDao.insert(nickname, sex, province, city, country, headimgurl, openId);
         }
 
-        int uid = Integer.parseInt(userDao.selectByOpenid(openId).getOpenid());
+        int uid =userDao.selectByOpenid(openId).getId();
 
         Date expire = new Date(new Date().getTime() + 1000 * 60 * 60 * 23L);
         String ticket = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 20);

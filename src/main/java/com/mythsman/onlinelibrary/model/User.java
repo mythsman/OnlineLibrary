@@ -13,6 +13,10 @@ public class User {
     String avatar;
     String openid;
 
+    public int getId() {
+        return id;
+    }
+
     public String getOpenid() {
         return openid;
     }
