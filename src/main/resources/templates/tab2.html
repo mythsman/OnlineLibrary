@@ -4,11 +4,11 @@
     <meta charset="UTF-8"/>
     <title>畅学文库</title>
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0"/>
-    <link rel="stylesheet" href="/css/weui.min.css"/>
-    <link rel="stylesheet" href="/css/index.css"/>
-    <link rel="stylesheet" href="/css/swiper.min.css"/>
-    <script src="js/swiper.min.js"/>
-    <script src="js/jquery.min.js"/>
+    <link rel="stylesheet" href="../static/css/weui.min.css" th:href="@{/css/weui.min.css}"/>
+    <link rel="stylesheet" href="../static/css/index.css" th:href="@{/css/index.css}"/>
+    <link rel="stylesheet" href="../static/css/swiper.min.css" th:href="@{/css/swiper.min.css}" />
+    <script src="../static/js/swiper.min.js" th:src="@{/js/swiper.min.js}" ></script>
+    <script src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}" ></script>
 </head>
 <body>
 <div class="weui-tab">
@@ -88,20 +88,20 @@
         </div>
     </div>
     <div class="weui-tabbar">
-        <a href="/app/tab1" class="weui-tabbar__item ">
-            <img src="icons/icon_tabbar.png" class="weui-tabbar__icon "/>
+        <a th:href="@{/app/tab1}" class="weui-tabbar__item ">
+            <img src="../static/icons/icon_tabbar.png" th:src="@{/icons/icon_tabbar.png}" class="weui-tabbar__icon "/>
             <p class="weui-tabbar__label">
                 悦学首页
             </p>
         </a>
-        <a href="/app/tab2" class="weui-tabbar__item weui-bar__item_on" >
-            <img src="icons/icon_tabbar.png" class="weui-tabbar__icon"/>
+        <a th:href="@{/app/tab2}" class="weui-tabbar__item weui-bar__item_on" >
+            <img src="../static/icons/icon_tabbar.png" th:src="@{/icons/icon_tabbar.png}" class="weui-tabbar__icon"/>
             <p class="weui-tabbar__label">
                 悦学文库
             </p>
         </a>
-        <a href="/app/tab3" class="weui-tabbar__item" >
-            <img src="icons/icon_tabbar.png" class="weui-tabbar__icon"/>
+        <a th:href="@{/app/tab3}" class="weui-tabbar__item" >
+            <img src="../static/icons/icon_tabbar.png" th:src="@{/icons/icon_tabbar.png}" class="weui-tabbar__icon"/>
             <p class="weui-tabbar__label">
                 我的设置
             </p>
