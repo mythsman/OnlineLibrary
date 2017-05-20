@@ -53,7 +53,7 @@ CREATE TABLE `user` (
   `province` varchar(40) NOT NULL,
   `city` varchar(40) NOT NULL,
   `country` varchar(40) NOT NULL,
-  `avatar` varchar(100) NOT NULL,
+  `avatar` varchar(150) NOT NULL,
   `openid` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
