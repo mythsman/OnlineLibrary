@@ -60,7 +60,7 @@ public class PassportInterceptor implements HandlerInterceptor {
 
         if(ticket==null){
             String callback= URLEncoder.encode("http://myths.mythsman.com","UTF-8");
-            String redirect = String.format("https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s&response_type=code&scope=%s#wechat_redirect", wechatService.getAppid(), callback ,"snsapi_userinfo");
+            String redirect = String.format("https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s&response_type=code&scope=%s&state=STATE#wechat_redirect", wechatService.getAppid(), callback ,"snsapi_userinfo");
             httpServletResponse.sendRedirect(redirect);
         }
         return true;
