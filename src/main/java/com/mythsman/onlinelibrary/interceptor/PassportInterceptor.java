@@ -30,9 +30,6 @@ public class PassportInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        if(httpServletRequest.getServletPath().equals("/wechat")){
-            return true;
-        }
         String code=httpServletRequest.getParameter("code");
         if(code!=null){
             String url=String.format(" https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s&grant_type=authorization_code",wechatService.getAppid(),wechatService.getSecret(),code);

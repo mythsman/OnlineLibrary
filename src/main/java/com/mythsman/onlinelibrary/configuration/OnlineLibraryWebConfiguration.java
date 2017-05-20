@@ -16,7 +16,7 @@ public class OnlineLibraryWebConfiguration extends WebMvcConfigurerAdapter {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(passportInterceptor);
+        registry.addInterceptor(passportInterceptor).addPathPatterns("/app/**");
         super.addInterceptors(registry);
     }
 
