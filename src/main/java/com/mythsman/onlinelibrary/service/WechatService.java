@@ -96,7 +96,6 @@ public class WechatService implements InitializingBean{
         xml.addElement("MsgType").addCDATA("text");
         xml.addElement("Content").addCDATA("欢迎您的使用!");
 
-        return response.asXML();
+        return response.getRootElement().asXML();
    }
-
 }
