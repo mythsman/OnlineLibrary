@@ -1,5 +1,7 @@
 package com.mythsman.onlinelibrary.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.mythsman.onlinelibrary.model.User;
 import com.mythsman.onlinelibrary.service.WechatService;
 import com.mythsman.onlinelibrary.util.Digest;
 import org.dom4j.Document;
@@ -51,6 +53,27 @@ public class WechatController {
         } else {
             return "";
         }
+    }
+
+    @RequestMapping(method = RequestMethod.GET, params = {"code"})
+    public String check(@RequestParam("code") String code) {
+            String url=String.format(" https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s&grant_type=authorization_code",wechatService.getAppid(),wechatService.getSecret(),code);
+            String res=wechatService.doGet(url);
+            String token= JSONObject.parseObject(res).getString("access_token");
+            String openId=JSONObject.parseObject(res).getString("openid");
+
+            res=wechatService.doGet(String.format("https://api.weixin.qq.com/sns/userinfo?access_token=%s&openid=%s&lang=zh_CN",token,openId));
+            JSONObject jsonObject=JSONObject.parseObject(res);
+            String nickname=jsonObject.getString("nickname");
+            String sex=jsonObject.getString("sex");
+            String province=jsonObject.getString("province");
+            String city=jsonObject.getString("city");
+            String country=jsonObject.getString("country");
+            String headimgurl=jsonObject.getString("headimgurl");
+            User user=new User();
+
+            System.out.println(nickname);
+            return "redirect:/app";
     }
 
     @RequestMapping(method = {RequestMethod.POST})

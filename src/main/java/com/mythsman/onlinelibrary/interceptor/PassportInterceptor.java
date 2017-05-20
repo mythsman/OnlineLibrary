@@ -30,24 +30,6 @@ public class PassportInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        String code=httpServletRequest.getParameter("code");
-        if(code!=null){
-            String url=String.format(" https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s&grant_type=authorization_code",wechatService.getAppid(),wechatService.getSecret(),code);
-            String res=wechatService.doGet(url);
-            String token=JSONObject.parseObject(res).getString("access_token");
-            String openId=JSONObject.parseObject(res).getString("openid");
-
-            res=wechatService.doGet(String.format("https://api.weixin.qq.com/sns/userinfo?access_token=%s&openid=%s&lang=zh_CN",token,openId));
-            JSONObject jsonObject=JSONObject.parseObject(res);
-            String nickname=jsonObject.getString("nickname");
-            String sex=jsonObject.getString("sex");
-            String province=jsonObject.getString("province");
-            String city=jsonObject.getString("city");
-            String country=jsonObject.getString("country");
-            String headimgurl=jsonObject.getString("headimgurl");
-            System.out.println(nickname);
-        }
-
         String ticket=null;
         if(httpServletRequest.getCookies()!=null) {
             for (Cookie cookie : httpServletRequest.getCookies()) {
@@ -59,7 +41,7 @@ public class PassportInterceptor implements HandlerInterceptor {
         }
 
         if(ticket==null){
-            String callback= URLEncoder.encode("http://myths.mythsman.com","UTF-8");
+            String callback= URLEncoder.encode("http://myths.mythsman.com/wechat","UTF-8");
             String redirect = String.format("https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s&response_type=code&scope=%s&state=STATE#wechat_redirect", wechatService.getAppid(), callback ,"snsapi_userinfo");
             httpServletResponse.sendRedirect(redirect);
         }
