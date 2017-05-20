@@ -5,7 +5,6 @@ import com.alibaba.fastjson.JSONObject;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
-import org.dom4j.Node;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -16,6 +15,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Date;
 
 /**
  * Created by myths on 5/18/17.
@@ -29,10 +29,25 @@ public class WechatService implements InitializingBean{
     @Value("${wechat.secret}")
     private String secret;
 
+    @Value("${wechat.id}")
+    private String id;
+
     private String accessToken;
 
     public String getAccessToken() {
         return accessToken;
+    }
+
+    public String getAppid() {
+        return appid;
+    }
+
+    public String getSecret() {
+        return secret;
+    }
+
+    public String getId() {
+        return id;
     }
 
     @Scheduled(fixedDelay = 3600000)
@@ -48,7 +63,7 @@ public class WechatService implements InitializingBean{
         updateAccessToken();
     }
 
-    private String doGet(String url){
+    public String doGet(String url){
         try {
 
             HttpURLConnection urlConnection = (HttpURLConnection) new URL(url).openConnection();
@@ -70,19 +85,18 @@ public class WechatService implements InitializingBean{
         }
         return null;
     }
-    public static void parseXml(String xml){
-        try {
-            Document document = DocumentHelper.parseText(xml);
-            Element element=document.getRootElement();
-            Node node=element.node(1);
-            System.out.println(node.getText());
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-    }
 
-    public static void main(String[] args){
-        String s="<xml><ToUserName><![CDATA[gh_51cef5288b63]]></ToUserName><FromUserName><![CDATA[oRSKrv-_0Mb833fVGEeJMcj33AIo]]></FromUserName> <CreateTime>1495179355</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[22]]></Content><MsgId>6421746431966456657</MsgId></xml>";
-        parseXml(s);
-    }
+   public String handleText(Document request){
+
+        Document response = DocumentHelper.createDocument();
+        Element xml = response.addElement( "xml" );
+        xml.addElement("ToUserName").addCDATA(id);
+        xml.addElement("FromUserName").addCDATA(request.selectSingleNode("//FromUserName").getText());
+        xml.addElement("CreateTime").addText(String.valueOf(new Date().getTime()/1000));
+        xml.addElement("MsgType").addCDATA("text");
+        xml.addElement("Content").addCDATA("欢迎您的使用!");
+
+        return response.asXML();
+   }
+
 }

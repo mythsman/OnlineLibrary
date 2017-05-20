@@ -35,3 +35,12 @@ CREATE TABLE `article` (
 
 INSERT INTO `article`(uid,school,college,course,name,brief,hash) values(1,'苏州大学','计算机科学与技术学院','离散数学','这是一个文件','这里是简介','232323232');
 
+DROP TABLE IF EXISTS `ticket`;
+CREATE TABLE `ticket` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) NOT NULL,
+  `ticket` varchar(40) NOT NULL,
+  `expire` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `ticket_index` (`ticket`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -2,6 +2,8 @@ package com.mythsman.onlinelibrary.controller;
 
 import com.mythsman.onlinelibrary.service.WechatService;
 import com.mythsman.onlinelibrary.util.Digest;
+import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +30,7 @@ public class WechatController {
     @Value("${wechat.token}")
     private String TOKEN;
 
-    @RequestMapping(value = "", method = RequestMethod.GET, params = {"signature", "timestamp", "nonce", "echostr"})
+    @RequestMapping(method = RequestMethod.GET, params = {"signature", "timestamp", "nonce", "echostr"})
     public String check(
             @RequestParam("signature") String signature,
             @RequestParam("timestamp") String timestamp,
@@ -51,9 +53,21 @@ public class WechatController {
         }
     }
 
-    @RequestMapping(value = "", method = {RequestMethod.POST})
+    @RequestMapping(method = {RequestMethod.POST})
+    @ResponseBody
     public String post(@RequestBody String xml) {
-        wechatService.parseXml(xml);
+        try {
+            Document document = DocumentHelper.parseText(xml);
+            String msgType=document.selectSingleNode("//MsgType").getText();
+            switch(msgType){
+                case "text":
+                    return wechatService.handleText(document);
+                default:
+                    break;
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         return "";
     }
 
