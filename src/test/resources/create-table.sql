@@ -40,7 +40,20 @@ CREATE TABLE `ticket` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL,
   `ticket` varchar(40) NOT NULL,
-  `expire` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `expire` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `ticket_index` (`ticket`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  UNIQUE KEY `ticket_index` (`ticket`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
+
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sex` int(11) NOT NULL,
+  `name` varchar(40) NOT NULL,
+  `province` varchar(40) NOT NULL,
+  `city` varchar(40) NOT NULL,
+  `country` varchar(40) NOT NULL,
+  `avatar` varchar(100) NOT NULL,
+  `openid` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;

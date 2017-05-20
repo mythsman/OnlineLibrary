@@ -8,7 +8,7 @@ import org.dom4j.Element;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -20,7 +20,7 @@ import java.util.Date;
 /**
  * Created by myths on 5/18/17.
  */
-@Component
+@Service
 public class WechatService implements InitializingBean{
 
     @Value("${wechat.appid}")
@@ -98,4 +98,6 @@ public class WechatService implements InitializingBean{
 
         return response.getRootElement().asXML();
    }
+
+
 }

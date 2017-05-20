@@ -22,7 +22,7 @@ import java.net.URLEncoder;
  * Created by myths on 5/4/17.
  */
 @Component
-public class PassportInterceptor implements HandlerInterceptor {
+public class AppInterceptor implements HandlerInterceptor {
     @Autowired
     UserComponent userComponent;
     @Autowired

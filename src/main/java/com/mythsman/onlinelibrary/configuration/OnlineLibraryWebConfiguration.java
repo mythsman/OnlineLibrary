@@ -1,6 +1,6 @@
 package com.mythsman.onlinelibrary.configuration;
 
-import com.mythsman.onlinelibrary.interceptor.PassportInterceptor;
+import com.mythsman.onlinelibrary.interceptor.AppInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -12,11 +12,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Component
 public class OnlineLibraryWebConfiguration extends WebMvcConfigurerAdapter {
     @Autowired
-    PassportInterceptor passportInterceptor;
+    AppInterceptor appInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(passportInterceptor).addPathPatterns("/app/**");
+        registry.addInterceptor(appInterceptor).addPathPatterns("/app/**");
         super.addInterceptors(registry);
     }
 

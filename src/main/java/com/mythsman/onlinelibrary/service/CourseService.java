@@ -4,7 +4,7 @@ import com.mythsman.onlinelibrary.dao.CourseDao;
 import com.mythsman.onlinelibrary.model.Course;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * Created by myths on 5/15/17.
  */
-@Component
+@Service
 public class CourseService implements InitializingBean{
 
     private Map<String,Map<String,List<String>>> courseMap;

@@ -11,6 +11,15 @@ public class User {
     String city;
     String country;
     String avatar;
+    String openid;
+
+    public String getOpenid() {
+        return openid;
+    }
+
+    public void setOpenid(String openid) {
+        this.openid = openid;
+    }
 
     public int getSex() {
         return sex;
