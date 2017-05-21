@@ -16,18 +16,5 @@ public class IndexController {
         return "redirect:/app";
     }
 
-    @RequestMapping(path = {"favourite"}, method = {RequestMethod.GET})
-    public String favourite() {
-        return "/app/favourite";
-    }
 
-    @RequestMapping(path = {"upload"}, method = {RequestMethod.GET})
-    public String upload() {
-        return "/app/upload";
-    }
-
-    @RequestMapping(path = {"about"}, method = {RequestMethod.GET})
-    public String about() {
-        return "/app/about";
-    }
 }
