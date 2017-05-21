@@ -18,16 +18,16 @@ public class IndexController {
 
     @RequestMapping(path = {"favourite"}, method = {RequestMethod.GET})
     public String favourite() {
-        return "favourite";
+        return "/app/favourite";
     }
 
     @RequestMapping(path = {"upload"}, method = {RequestMethod.GET})
     public String upload() {
-        return "upload";
+        return "/app/upload";
     }
 
     @RequestMapping(path = {"about"}, method = {RequestMethod.GET})
     public String about() {
-        return "about";
+        return "/app/about";
     }
 }
