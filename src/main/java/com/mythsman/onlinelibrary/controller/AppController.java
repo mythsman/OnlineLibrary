@@ -52,17 +52,17 @@ public class AppController {
         return JSON.toJSONString(list);
     }
 
-    @RequestMapping(path = {"favourite"}, method = {RequestMethod.GET})
+    @RequestMapping(path = {"/favourite"}, method = {RequestMethod.GET})
     public String favourite() {
         return "favourite";
     }
 
-    @RequestMapping(path = {"upload"}, method = {RequestMethod.GET})
+    @RequestMapping(path = {"/upload"}, method = {RequestMethod.GET})
     public String upload() {
         return "upload";
     }
 
-    @RequestMapping(path = {"about"}, method = {RequestMethod.GET})
+    @RequestMapping(path = {"/about"}, method = {RequestMethod.GET})
     public String about() {
         return "about";
     }
