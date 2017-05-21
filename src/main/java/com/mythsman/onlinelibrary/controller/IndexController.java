@@ -11,10 +11,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class IndexController {
 
-    @RequestMapping(path = {"index",""},method = {RequestMethod.GET})
-    public String index(){
+    @RequestMapping(path = {"index", ""}, method = {RequestMethod.GET})
+    public String index() {
         return "redirect:/app";
     }
 
+    @RequestMapping(path = {"favourite"}, method = {RequestMethod.GET})
+    public String favourite() {
+        return "favourite";
+    }
 
+    @RequestMapping(path = {"upload"}, method = {RequestMethod.GET})
+    public String upload() {
+        return "upload";
+    }
+
+    @RequestMapping(path = {"about"}, method = {RequestMethod.GET})
+    public String about() {
+        return "about";
+    }
 }

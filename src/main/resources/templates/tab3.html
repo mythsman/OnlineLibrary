@@ -41,8 +41,8 @@
                             我的昵称
                         </p>
                     </div>
-                    <div class="weui-cell__ft">
-                        {{state.user.name}}
+                    <div th:text="${user.name}" class="weui-cell__ft">
+                        mythss
                     </div>
                 </div>
                 <div class="weui-cell">
@@ -54,8 +54,8 @@
                             我的等级
                         </p>
                     </div>
-                    <div class="weui-cell__ft">
-                        {{state.user.level}}
+                    <div th:text="${user.level}" class="weui-cell__ft">
+                        10
                     </div>
                 </div>
                 <div class="weui-cell">
@@ -67,8 +67,8 @@
                             我的积分
                         </p>
                     </div>
-                    <div class="weui-cell__ft">
-                        {{state.user.point}}
+                    <div th:text="${user.point}" class="weui-cell__ft">
+                        10
                     </div>
                 </div>
             </div>
@@ -76,7 +76,7 @@
                 我的文库
             </div>
             <div class="weui-cells">
-                <a class="weui-cell weui-cell_access" href="javascript:;">
+                <a class="weui-cell weui-cell_access" th:href="@{/app/favourite}">
                     <div class="weui-cell__hd">
                         <img  src="../static/icons/icon_tabbar.png" th:src="@{/icons/icon_tabbar.png}" alt="" style="width:20px;margin-right:5px;display:block"/>
                     </div>
@@ -88,7 +88,7 @@
                     <div class="weui-cell__ft">
                     </div>
                 </a>
-                <a class="weui-cell weui-cell_access" href="javascript:;">
+                <a class="weui-cell weui-cell_access" th:href="@{/app/upload}">
                     <div class="weui-cell__hd">
                         <img  src="../static/icons/icon_tabbar.png" th:src="@{/icons/icon_tabbar.png}" alt="" style="width:20px;margin-right:5px;display:block"/>
                     </div>
@@ -100,24 +100,12 @@
                     <div class="weui-cell__ft">
                     </div>
                 </a>
-                <a class="weui-cell weui-cell_access" href="javascript:;">
-                    <div class="weui-cell__hd">
-                        <img  src="../static/icons/icon_tabbar.png" th:src="@{/icons/icon_tabbar.png}" alt="" style="width:20px;margin-right:5px;display:block"/>
-                    </div>
-                    <div class="weui-cell__bd">
-                        <p>
-                            我的文件
-                        </p>
-                    </div>
-                    <div class="weui-cell__ft">
-                    </div>
-                </a>
             </div>
             <div class="weui-cells__title">
                 关于
             </div>
             <div class="weui-cells">
-                <a class="weui-cell weui-cell_access" href="javascript:;">
+                <a class="weui-cell weui-cell_access" th:href="@{/app/about}">
                     <div class="weui-cell__hd">
                         <img  src="../static/icons/icon_tabbar.png" th:src="@{/icons/icon_tabbar.png}" alt="" style="width:20px;margin-right:5px;display:block"/>
                     </div>

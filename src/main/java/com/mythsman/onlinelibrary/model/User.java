@@ -12,6 +12,24 @@ public class User {
     String country;
     String avatar;
     String openid;
+    int level;
+    int point;
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getPoint() {
+        return point;
+    }
+
+    public void setPoint(int point) {
+        this.point = point;
+    }
 
     public int getId() {
         return id;
