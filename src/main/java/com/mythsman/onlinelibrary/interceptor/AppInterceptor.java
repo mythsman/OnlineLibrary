@@ -5,7 +5,6 @@ package com.mythsman.onlinelibrary.interceptor;
  */
 
 
-import com.alibaba.fastjson.JSONObject;
 import com.mythsman.onlinelibrary.component.UserComponent;
 import com.mythsman.onlinelibrary.dao.TicketDao;
 import com.mythsman.onlinelibrary.dao.UserDao;
@@ -28,6 +27,8 @@ import java.util.Date;
  */
 @Component
 public class AppInterceptor implements HandlerInterceptor {
+
+
     @Autowired
     UserComponent userComponent;
     @Autowired
