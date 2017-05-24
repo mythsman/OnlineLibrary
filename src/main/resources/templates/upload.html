@@ -74,7 +74,6 @@
             </div>
 
             <input id="file" type="file" style="display:none" onchange="$('#fileName').html($('#file').val());"/>
-            <input type="submit" style="display:none" value="Submit Comment"/>
 
             <div class="weui-cells__title">
                 请选择文件
@@ -107,14 +106,13 @@
             <div class="weui-cells">
                 <div class="weui-cell">
                     <div class="weui-cell__bd">
-								<textarea class="weui-textarea" placeholder="请输入简介" rows="3">
-								</textarea>
+					    <textarea class="weui-textarea" placeholder="请输入简介"  rows="3"></textarea>
                     </div>
                 </div>
             </div>
-            <a href="javascript:;" class="weui-btn weui-btn_primary">
+            <input type="submit" class="weui-btn weui-btn_primary">
                 确认上传
-            </a>
+            </input>
         </form>
     </div>
 </div>
