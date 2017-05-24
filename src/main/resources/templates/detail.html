@@ -75,6 +75,7 @@
                             src="https://raw.github.com/mozilla/pdf.js/gh-pages/build/pdf.js"></script>
 
                     <script th:inline="javascript">
+                        /*<![CDATA[*/
                         //
                         // NOTE:
                         // Modifying the URL below to another server will likely *NOT* work. Because of browser
@@ -145,6 +146,7 @@
                             pdfDoc = _pdfDoc;
                             renderPage(pageNum);
                         });
+                        /*]]>*/
                     </script>
                 </div>
             </div>
