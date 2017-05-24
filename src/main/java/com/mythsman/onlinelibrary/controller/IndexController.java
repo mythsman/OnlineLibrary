@@ -3,6 +3,8 @@ package com.mythsman.onlinelibrary.controller;
 import com.mythsman.onlinelibrary.dao.ArticleDao;
 import com.mythsman.onlinelibrary.model.Article;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +24,7 @@ import java.io.IOException;
  */
 @Controller
 public class IndexController {
+    Logger logger= LoggerFactory.getLogger(IndexController.class);
 
     @Autowired
     ArticleDao articleDao;
@@ -42,6 +45,8 @@ public class IndexController {
     public void download(@PathVariable("fid")String fid, HttpServletResponse httpServletResponse) {
         Article article=articleDao.selectByFid(Integer.parseInt(fid));
         String name="/home/ubuntu/uploads/"+article.getHash()+".pdf";
+
+        logger.info(name+" has been downloaded.");
 
         httpServletResponse.setContentType("application/octet-stream");
         FileInputStream fis = null;
