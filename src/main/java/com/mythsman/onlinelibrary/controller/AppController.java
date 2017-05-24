@@ -63,33 +63,7 @@ public class AppController {
         return "detail";
     }
 
-    @RequestMapping(path = {"/download/{fid}"}, method = {RequestMethod.GET})
-    public void download(@PathVariable("fid")String fid, HttpServletResponse httpServletResponse) {
-        Article article=articleDao.selectByFid(Integer.parseInt(fid));
-        String name="/home/ubuntu/uploads/"+article.getHash()+".pdf";
 
-        httpServletResponse.setContentType("application/octet-stream");
-        FileInputStream fis = null;
-        try {
-            File file = new File(name);
-            fis = new FileInputStream(file);
-            httpServletResponse.setHeader("Content-Disposition", "attachment; filename="+file.getName());
-            IOUtils.copy(fis,httpServletResponse.getOutputStream());
-            httpServletResponse.flushBuffer();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
 
     @RequestMapping(path = {"/favourite"}, method = {RequestMethod.GET})
     public String favourite() {
