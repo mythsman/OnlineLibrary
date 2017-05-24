@@ -48,7 +48,7 @@ public class IndexController {
 
         logger.info(name+" has been downloaded.");
 
-        httpServletResponse.setContentType("application/octet-stream");
+        httpServletResponse.setContentType("application/pdf");
         FileInputStream fis = null;
         try {
             File file = new File(name);
