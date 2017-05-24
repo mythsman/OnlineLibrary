@@ -73,7 +73,7 @@
                 </div>
             </div>
 
-            <input id="file" type="file" style="display:none" onchange="$('#fileName').html($('#file').val());"/>
+            <input id="file" name="file" type="file" accept="application/msword,application/vnd.ms-powerpoint,application/pdf" style="display:none" onchange="$('#fileName').html($('#file').val());"  required="required"/>
 
             <div class="weui-cells__title">
                 请选择文件
@@ -96,7 +96,7 @@
             <div class="weui-cells">
                 <div class="weui-cell">
                     <div class="weui-cell__bd">
-                        <input class="weui-input" type="text" placeholder="请输入标题"/>
+                        <input class="weui-input" type="text" placeholder="请输入标题"  required="required"/>
                     </div>
                 </div>
             </div>
@@ -106,13 +106,11 @@
             <div class="weui-cells">
                 <div class="weui-cell">
                     <div class="weui-cell__bd">
-					    <textarea class="weui-textarea" placeholder="请输入简介"  rows="3"></textarea>
+					    <textarea class="weui-textarea" placeholder="请输入简介"  rows="3" required="required"></textarea>
                     </div>
                 </div>
             </div>
-            <input type="submit" class="weui-btn weui-btn_primary">
-                确认上传
-            </input>
+            <input type="submit" class="weui-btn weui-btn_primary" value="确认上传"/>
         </form>
     </div>
 </div>
