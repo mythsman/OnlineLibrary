@@ -62,7 +62,9 @@ public class AppController {
     }
 
     @RequestMapping(path = {"/upload"}, method = {RequestMethod.GET})
-    public String upload() {
+    public String upload(Model model) {
+        Map<String,Map<String,List<String>>> schools= courseService.getCourseMap();
+        model.addAttribute("courseMap",schools);
         return "upload";
     }
 

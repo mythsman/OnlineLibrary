@@ -26,93 +26,146 @@
         </div>
     </div>
     <div class="weui-tab__panel" style="background-color:#ebebf1">
-        <div class="weui-cells__title">
-            请选择课程
-        </div>
-        <div class="weui-cells">
-            <div class="weui-cell weui-cell_select weui-cell_select-after">
-                <div class="weui-cell__hd">
-                    <label class="weui-label">
-                        当前学校
-                    </label>
+        <form action="/app/upload" method="post" enctype="multipart/form-data">
+            <div class="weui-cells__title">
+                请选择课程
+            </div>
+            <div class="weui-cells">
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">
+                            当前学校
+                        </label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <select id="selectSchool" class="weui-select" name="school" dir="rtl">
+                            {{schoolName}}
+                        </select>
+                    </div>
                 </div>
-                <div class="weui-cell__bd">
-                    <select class="weui-select" name="searchSchool" dir="rtl">
-                        <option >{{school.name}}</option>
-                    </select>
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">
+                            当前学院
+                        </label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <select id="selectCollege" class="weui-select" name="college" dir="rtl">
+                            <option>
+                                {{college.Name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">
+                            当前课程
+                        </label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <select id="selectCourse" class="weui-select" name="course" dir="rtl">
+                            <option>
+                                {{courseName}}
+                            </option>
+                        </select>
+                    </div>
                 </div>
             </div>
-            <div class="weui-cell weui-cell_select weui-cell_select-after">
-                <div class="weui-cell__hd">
-                    <label class="weui-label">
-                        当前学院
-                    </label>
-                </div>
-                <div class="weui-cell__bd">
-                    <select class="weui-select" name="searchCollege" dir="rtl">
-                        <option >{{college.name}}
-                        </option>
-                    </select>
-                </div>
-            </div>
-            <div class="weui-cell weui-cell_select weui-cell_select-after">
-                <div class="weui-cell__hd">
-                    <label class="weui-label">
-                        当前课程
-                    </label>
-                </div>
-                <div class="weui-cell__bd">
-                    <select  class="weui-select" name="searchCourse" dir="rtl">
-                        <option >{{course.name}}</option>
-                    </select>
 
-                </div>
-            </div>
-        </div>
-        <form action="http://localhost/upload" method="get" enctype="multipart/form-data">
             <input id="file" type="file" style="display:none" onchange="$('#fileName').html($('#file').val());"/>
             <input type="submit" style="display:none" value="Submit Comment"/>
-        </form>
-        <div class="weui-cells__title">
-            请选择文件
-        </div>
-        <div class="weui-cells">
-            <a id="chooseFileBtn" class="weui-cell weui-cell_access" href="javascript:;"
-               onclick="$('#file').click();">
-                <div class="weui-cell__bd">
-                    <p>
-                        选择文件
-                    </p>
-                </div>
-                <div id="fileName" class="weui-cell__ft">
-                </div>
-            </a>
-        </div>
-        <div class="weui-cells__title">
-            请输入标题
-        </div>
-        <div class="weui-cells">
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" placeholder="请输入标题"/>
+
+            <div class="weui-cells__title">
+                请选择文件
+            </div>
+            <div class="weui-cells">
+                <a id="chooseFileBtn" class="weui-cell weui-cell_access" href="javascript:;"
+                   onclick="$('#file').click();">
+                    <div class="weui-cell__bd">
+                        <p>
+                            选择文件
+                        </p>
+                    </div>
+                    <div id="fileName" class="weui-cell__ft">
+                    </div>
+                </a>
+            </div>
+            <div class="weui-cells__title">
+                请输入标题
+            </div>
+            <div class="weui-cells">
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" placeholder="请输入标题"/>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="weui-cells__title">
-            请输入简介
-        </div>
-        <div class="weui-cells">
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-								<textarea class="weui-textarea" placeholder="请输入简介" rows="3" >
+            <div class="weui-cells__title">
+                请输入简介
+            </div>
+            <div class="weui-cells">
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+								<textarea class="weui-textarea" placeholder="请输入简介" rows="3">
 								</textarea>
+                    </div>
                 </div>
             </div>
-        </div>
-        <a href="javascript:;" class="weui-btn weui-btn_primary">
-            确认上传
-        </a>
+            <a href="javascript:;" class="weui-btn weui-btn_primary">
+                确认上传
+            </a>
+        </form>
     </div>
 </div>
 </body>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var courseMap = [[${courseMap}]];
+    var schoolName = "";
+    var collegeName = "";
+    $(function () {
+        updateSchool();
+        updateCollege();
+        updateCourse();
+
+        $("#selectSchool").on("change", function () {
+            updateCollege();
+        });
+        $("#selectCollege").on("change", function () {
+            updateCourse();
+        });
+    });
+
+    function updateSchool() {
+        var items = "";
+        for (var schoolName in courseMap) {
+            var item = '<option value="' + schoolName + '">' + schoolName + '</option>';
+            items = items + item;
+        }
+        $("#selectSchool").html(items);
+    }
+
+    function updateCollege() {
+        var items = "";
+        schoolName = $("#selectSchool").val();
+        for (var collegeName in courseMap[schoolName]) {
+            var item = '<option value="' + collegeName + '">' + collegeName + '</option>';
+            items = items + item;
+        }
+        $("#selectCollege").html(items);
+
+    }
+    function updateCourse() {
+        var items = "";
+        collegeName = $("#selectCollege").val();
+        for (var courseName in courseMap[schoolName][collegeName]) {
+            var item = '<option value="' + courseMap[schoolName][collegeName][courseName] + '">' + courseMap[schoolName][collegeName][courseName] + '</option>';
+            items = items + item;
+        }
+        $("#selectCourse").html(items);
+    }
+
+    /*]]>*/
+</script>
 </html>
