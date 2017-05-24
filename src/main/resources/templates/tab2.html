@@ -138,7 +138,7 @@
                     data = JSON.parse(data);
                     var items = "";
                     for (var i in data) {
-                        items = items + '<div onclick=window.location.href="/detail/' + data[i]['fid'] + '" class="weui-panel"><div class="weui-panel__bd"><div class="weui-media-box weui-media-box_text"><h4 class="weui-media-box__title">' + data[i]['name'] + '</h4> <p class="weui-media-box__desc">' + data[i]['brief'] + '</p><ul class="weui-media-box__info"><li class="weui-media-box__info__meta">下载次数：' + data[i]['download'] + '</li></ul></div></div></div>';
+                        items = items + '<div onclick=window.location.href="/app/detail/' + data[i]['fid'] + '" class="weui-panel"><div class="weui-panel__bd"><div class="weui-media-box weui-media-box_text"><h4 class="weui-media-box__title">' + data[i]['name'] + '</h4> <p class="weui-media-box__desc">' + data[i]['brief'] + '</p><ul class="weui-media-box__info"><li class="weui-media-box__info__meta">下载次数：' + data[i]['download'] + '</li></ul></div></div></div>';
                     }
                     $("#result").html(items);
                 }
