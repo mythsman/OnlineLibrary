@@ -70,8 +70,8 @@ public class AppController {
         return "upload";
     }
 
-    @RequestMapping(path = {"/upload"}, method = {RequestMethod.POST},params = {"school","college","course","file"})
-    public String getFile(@Param("school")String school, @Param("college")String college, @Param("course")String course, @Param("file")MultipartFile multipartFile) {
+    @RequestMapping(path = {"/upload"}, method = {RequestMethod.POST},params = {"school","college","course"})
+    public String getFile(@RequestParam("school")String school, @RequestParam("college")String college, @RequestParam("course")String course, @RequestParam("file")MultipartFile multipartFile) {
 
         return "redirect:/app/tab3";
     }
