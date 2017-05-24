@@ -4,14 +4,18 @@ import com.alibaba.fastjson.JSON;
 import com.mythsman.onlinelibrary.dao.ArticleDao;
 import com.mythsman.onlinelibrary.model.Article;
 import com.mythsman.onlinelibrary.service.CourseService;
-import org.apache.ibatis.annotations.Param;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -60,11 +64,31 @@ public class AppController {
     }
 
     @RequestMapping(path = {"/download/{fid}"}, method = {RequestMethod.GET})
-    public String download( @PathVariable("fid")String fid) {
+    public void download(@PathVariable("fid")String fid, HttpServletResponse httpServletResponse) {
         Article article=articleDao.selectByFid(Integer.parseInt(fid));
-        File file=new File(".");
-        System.out.println(file.getAbsolutePath());
-        return "detail";
+        String name="/home/ubuntu/uploads/"+article.getHash()+".pdf";
+
+        httpServletResponse.setContentType("application/octet-stream");
+        FileInputStream fis = null;
+        try {
+            File file = new File(name);
+            fis = new FileInputStream(file);
+            httpServletResponse.setHeader("Content-Disposition", "attachment; filename="+file.getName());
+            IOUtils.copy(fis,httpServletResponse.getOutputStream());
+            httpServletResponse.flushBuffer();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     @RequestMapping(path = {"/favourite"}, method = {RequestMethod.GET})
@@ -81,8 +105,6 @@ public class AppController {
 
     @RequestMapping(path = {"/upload"}, method = {RequestMethod.POST},params = {"school","college","course"})
     public String getFile(@RequestParam("school")String school, @RequestParam("college")String college, @RequestParam("course")String course, @RequestParam("file")MultipartFile multipartFile) {
-        System.out.println("getName:"+multipartFile.getName());
-        System.out.println("getOriginalFilename:"+multipartFile.getOriginalFilename());
         return "redirect:/app/tab3";
     }
 
