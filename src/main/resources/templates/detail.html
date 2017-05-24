@@ -53,10 +53,9 @@
                         <a th:if="${isfavourite}==true" class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:">移出收藏</a>
                         <a th:unless="${isfavourite}==true" class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:">加入收藏</a>
                         -->
-                        <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary"
-                                href="javascript:">
+                        <a class="weui-form-preview__btn weui-form-preview__btn_primary" th:href="'/app/download/'+${article.fid}" >
                             立即下载
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>

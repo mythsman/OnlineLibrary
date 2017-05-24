@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -58,6 +59,14 @@ public class AppController {
         return "detail";
     }
 
+    @RequestMapping(path = {"/download/{fid}"}, method = {RequestMethod.GET})
+    public String download( @PathVariable("fid")String fid) {
+        Article article=articleDao.selectByFid(Integer.parseInt(fid));
+        File file=new File(".");
+        System.out.println(file.getAbsolutePath());
+        return "detail";
+    }
+
     @RequestMapping(path = {"/favourite"}, method = {RequestMethod.GET})
     public String favourite() {
         return "favourite";
@@ -72,7 +81,8 @@ public class AppController {
 
     @RequestMapping(path = {"/upload"}, method = {RequestMethod.POST},params = {"school","college","course"})
     public String getFile(@RequestParam("school")String school, @RequestParam("college")String college, @RequestParam("course")String course, @RequestParam("file")MultipartFile multipartFile) {
-
+        System.out.println("getName:"+multipartFile.getName());
+        System.out.println("getOriginalFilename:"+multipartFile.getOriginalFilename());
         return "redirect:/app/tab3";
     }
 
@@ -80,4 +90,5 @@ public class AppController {
     public String about() {
         return "about";
     }
+
 }
