@@ -51,7 +51,8 @@ public class AppController {
 
     @RequestMapping(path = {"/detail/{fid}"}, method = {RequestMethod.GET})
     public String detail(Model model, @PathVariable("fid")String fid) {
-
+        Article article=articleDao.selectByFid(Integer.parseInt(fid));
+        model.addAttribute("article",article);
         return "detail";
     }
 

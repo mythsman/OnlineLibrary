@@ -16,4 +16,8 @@ import java.util.List;
 public interface ArticleDao {
     @Select({"select * from `article` where school=#{school} and college=#{college} and course=#{course}"})
     public List<Article> selectByCourse(@Param("school") String school, @Param("college") String college,@Param("course")String course);
+
+    @Select({"select * from `article` where fid=#{fid}"})
+    public Article selectByFid(@Param("fid")int fid);
+
 }
