@@ -55,7 +55,7 @@ public class IndexController {
         Article article=articleDao.selectByFid(Integer.parseInt(fid));
         String name="/home/ubuntu/uploads/"+article.getHash()+".pdf";
 
-        logger.info(name+" has been downloaded.");
+        logger.info(name+" has been previewed.");
 
         httpServletResponse.setContentType("application/pdf");
         FileInputStream fis = null;
