@@ -43,6 +43,15 @@ public class IndexController {
 
     @RequestMapping(path = {"/download/{fid}"}, method = {RequestMethod.GET})
     public void download(@PathVariable("fid")String fid, HttpServletResponse httpServletResponse) {
+        getPdf(fid,httpServletResponse,"attachment");
+    }
+
+    @RequestMapping(path = {"/preview/{fid}"}, method = {RequestMethod.GET})
+    public void preview(@PathVariable("fid")String fid, HttpServletResponse httpServletResponse) {
+        getPdf(fid,httpServletResponse,"inline");
+    }
+
+    private void getPdf(String fid,HttpServletResponse httpServletResponse,String content){
         Article article=articleDao.selectByFid(Integer.parseInt(fid));
         String name="/home/ubuntu/uploads/"+article.getHash()+".pdf";
 
@@ -53,12 +62,10 @@ public class IndexController {
         try {
             File file = new File(name);
             fis = new FileInputStream(file);
-            httpServletResponse.setHeader("Content-Disposition", "inline; filename="+file.getName());
+            httpServletResponse.setHeader("Content-Disposition", content+"; filename="+file.getName());
             IOUtils.copy(fis,httpServletResponse.getOutputStream());
             httpServletResponse.flushBuffer();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        }catch (IOException e) {
             e.printStackTrace();
         } finally {
             if (fis != null) {
@@ -70,5 +77,6 @@ public class IndexController {
             }
         }
     }
+
 
 }
