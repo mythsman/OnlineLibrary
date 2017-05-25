@@ -56,6 +56,6 @@ CREATE TABLE `user` (
   `avatar` varchar(150) NOT NULL,
   `openid` varchar(40) NOT NULL,
   `level` int(11) DEFAULT 1,
-  `point` int(11) DEFAULT 10
+  `point` int(11) DEFAULT 10,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;

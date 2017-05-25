@@ -53,7 +53,7 @@ public class IndexController {
         try {
             File file = new File(name);
             fis = new FileInputStream(file);
-            httpServletResponse.setHeader("Content-Disposition", "attachment; filename="+file.getName());
+            httpServletResponse.setHeader("Content-Disposition", "inline; filename="+file.getName());
             IOUtils.copy(fis,httpServletResponse.getOutputStream());
             httpServletResponse.flushBuffer();
         } catch (FileNotFoundException e) {
