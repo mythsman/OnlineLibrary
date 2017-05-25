@@ -12,6 +12,7 @@ import com.mythsman.onlinelibrary.model.Ticket;
 import com.mythsman.onlinelibrary.model.User;
 import com.mythsman.onlinelibrary.service.WechatService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -40,8 +41,16 @@ public class AppInterceptor implements HandlerInterceptor {
     @Autowired
     UserDao userDao;
 
+    @Value("debug")
+    boolean debug;
+
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
+        if(debug){
+            User user = userDao.selectById(1);
+            userComponent.setUser(user);
+            return true;
+        }
         String ticket = null;
         if (httpServletRequest.getCookies() != null) {
             for (Cookie cookie : httpServletRequest.getCookies()) {

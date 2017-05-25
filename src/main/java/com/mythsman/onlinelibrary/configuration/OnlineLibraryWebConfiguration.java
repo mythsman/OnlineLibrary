@@ -19,10 +19,4 @@ public class OnlineLibraryWebConfiguration extends WebMvcConfigurerAdapter {
         registry.addInterceptor(appInterceptor).addPathPatterns("/app/**");
         super.addInterceptors(registry);
     }
-
-//    @Override
-//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        registry.addResourceHandler("/uploads/**").addResourceLocations("classpath:uploads/");
-//        super.addResourceHandlers(registry);
-//    }
 }

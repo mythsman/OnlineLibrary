@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
@@ -43,21 +41,21 @@ public class IndexController {
 
     @RequestMapping(path = {"/download/{fid}"}, method = {RequestMethod.GET})
     public void download(@PathVariable("fid")String fid, HttpServletResponse httpServletResponse) {
-        getPdf(fid,httpServletResponse,"attachment");
+        getFile(fid,httpServletResponse,"attachment");
     }
 
     @RequestMapping(path = {"/preview/{fid}"}, method = {RequestMethod.GET})
     public void preview(@PathVariable("fid")String fid, HttpServletResponse httpServletResponse) {
-        getPdf(fid,httpServletResponse,"inline");
+        getFile(fid,httpServletResponse,"inline");
     }
 
-    private void getPdf(String fid,HttpServletResponse httpServletResponse,String content){
+    private void getFile(String fid, HttpServletResponse httpServletResponse, String content){
         Article article=articleDao.selectByFid(Integer.parseInt(fid));
         String name="/home/ubuntu/uploads/"+article.getHash()+".pdf";
 
         logger.info(name+" has been previewed.");
 
-        httpServletResponse.setContentType("application/pdf");
+        httpServletResponse.setContentType("application/oct-stream");
         FileInputStream fis = null;
         try {
             File file = new File(name);
