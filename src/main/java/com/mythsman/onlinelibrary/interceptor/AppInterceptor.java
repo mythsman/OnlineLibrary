@@ -41,7 +41,7 @@ public class AppInterceptor implements HandlerInterceptor {
     @Autowired
     UserDao userDao;
 
-    @Value("debug")
+    @Value("${debug}")
     boolean debug;
 
     @Override

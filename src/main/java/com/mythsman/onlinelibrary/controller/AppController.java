@@ -4,18 +4,12 @@ import com.alibaba.fastjson.JSON;
 import com.mythsman.onlinelibrary.dao.ArticleDao;
 import com.mythsman.onlinelibrary.model.Article;
 import com.mythsman.onlinelibrary.service.CourseService;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
