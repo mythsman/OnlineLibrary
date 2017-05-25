@@ -42,11 +42,11 @@ public class AppInterceptor implements HandlerInterceptor {
     UserDao userDao;
 
     @Value("${debug}")
-    boolean debug;
+    String debug;
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        if(debug){
+        if(debug.equals(true)){
             User user = userDao.selectById(1);
             userComponent.setUser(user);
             return true;
