@@ -12,11 +12,29 @@ public class Article {
     private String college;
     private String course;
     private String name;
+    private String rawname;
     private String brief;
     private Date date;
     private Integer download;
     private Integer price;
     private String hash;
+    private Integer valid;
+
+    public String getRawname() {
+        return rawname;
+    }
+
+    public void setRawname(String rawname) {
+        this.rawname = rawname;
+    }
+
+    public Integer getValid() {
+        return valid;
+    }
+
+    public void setValid(Integer valid) {
+        this.valid = valid;
+    }
 
     public String getFid() {
         return fid;

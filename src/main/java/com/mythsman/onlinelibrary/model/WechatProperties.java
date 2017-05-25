@@ -13,6 +13,15 @@ public class WechatProperties {
     private String appid;
     private String secret;
     private String id;
+    private String prefix;
+
+    public String getPrefix() {
+        return prefix;
+    }
+
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
 
     public String getId() {
         return id;

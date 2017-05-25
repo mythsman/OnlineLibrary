@@ -6,6 +6,7 @@ import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,9 @@ public class IndexController {
 
     @Autowired
     ArticleDao articleDao;
+
+    @Value("${wechat.prefix}")
+    String prefix;
 
     @RequestMapping(path = {"index", ""}, method = {RequestMethod.GET})
     public String index() {
@@ -51,7 +55,7 @@ public class IndexController {
 
     private void getFile(String fid, HttpServletResponse httpServletResponse, String content){
         Article article=articleDao.selectByFid(Integer.parseInt(fid));
-        String name="/home/ubuntu/uploads/"+article.getHash()+".pdf";
+        String name=prefix+article.getHash();
 
         logger.info(name+" has been previewed.");
 
@@ -60,7 +64,7 @@ public class IndexController {
         try {
             File file = new File(name);
             fis = new FileInputStream(file);
-            httpServletResponse.setHeader("Content-Disposition", content+"; filename="+file.getName());
+            httpServletResponse.setHeader("Content-Disposition", content+"; filename="+article.getRawname());
             IOUtils.copy(fis,httpServletResponse.getOutputStream());
             httpServletResponse.flushBuffer();
         }catch (IOException e) {
