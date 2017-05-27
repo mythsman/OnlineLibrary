@@ -61,4 +61,4 @@ CREATE TABLE `user` (
   `point` int(11) DEFAULT 10,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
-INSERT INTO `user`(id,sex,name,province,city,country,avatar,openid,level,point) values(1,3,name,province,city,country,avatar,openid,1,10);
+INSERT INTO `user`(id,sex,name,province,city,country,avatar,openid,level,point) values(1,3,'name','province','city','country','avatar','openid',1,10);
